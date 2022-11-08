@@ -23,7 +23,7 @@ public class Main {
 
 //        userService.removeUserById(id);
 
-//        userService.cleanUsersTable();
-//        userService.dropUsersTable();
+        userService.cleanUsersTable();
+        userService.dropUsersTable();
     }
 }

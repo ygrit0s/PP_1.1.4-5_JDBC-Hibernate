@@ -26,7 +26,7 @@ public class UserDaoJDBCImpl implements UserDao {
     @Override
     public void dropUsersTable() throws SQLException {
         Connection conn = Util.getConnection();
-        String dropSQL = "DROP TABLE IF EXISTS user;";
+        String dropSQL = "DROP TABLE IF EXISTS `mydb`.`user`;";
         try (Statement stmt = conn.createStatement()) {
             stmt.execute(dropSQL);
         }
@@ -34,7 +34,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) throws SQLException {
         Connection conn = Util.getConnection();
-        String insertSQL = "INSERT INTO `user` (`name`, `lastName`, `age`) VALUES (?, ?, ?);";
+        String insertSQL = "INSERT INTO `mydb`.`user` (`name`, `lastName`, `age`) VALUES (?, ?, ?);";
         try (PreparedStatement prepStmt = conn.prepareStatement(insertSQL)) {
             prepStmt.setString(1, name);
             prepStmt.setString(2, lastName);
@@ -45,7 +45,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void removeUserById(long id) throws SQLException {
         Connection conn = Util.getConnection();
-        String deleteSQL = "DELETE FROM `user` WHERE `id` = ?;";
+        String deleteSQL = "DELETE FROM `mydb`.`user` WHERE `id` = ?;";
         try (PreparedStatement prepStmt = conn.prepareStatement(deleteSQL)) {
             prepStmt.setLong(1, id);
             prepStmt.executeUpdate();
@@ -55,7 +55,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public List<User> getAllUsers() throws SQLException {
         List<User> userList = new ArrayList<>();
         Connection conn = Util.getConnection();
-        String selectSQL = "SELECT * FROM `user`;";
+        String selectSQL = "SELECT * FROM `mydb`.`user`;";
         try (PreparedStatement prepStmt = conn.prepareStatement(selectSQL)) {
             ResultSet rSet = prepStmt.executeQuery();
             while (rSet.next()) {
@@ -72,7 +72,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void cleanUsersTable() throws SQLException {
         Connection conn = Util.getConnection();
-        String truncateSQL = "TRUNCATE TABLE `user`;";
+        String truncateSQL = "TRUNCATE TABLE `mydb`.`user`;";
         try (Statement stmt = conn.createStatement()) {
             stmt.execute(truncateSQL);
         }
