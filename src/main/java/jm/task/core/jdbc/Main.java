@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 
 public class Main {
-    public final static Logger LOGGER = Logger.getLogger(UserServiceImpl.class.getName());
+    public final static Logger LOGGER = Logger.getLogger(Main.class.getName());
     public static final UserService userService = new UserServiceImpl();
 
     public static void main(String[] args) throws SQLException {
