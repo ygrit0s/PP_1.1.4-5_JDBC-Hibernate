@@ -20,6 +20,10 @@ public class Util {
     private static final String PASS = "root";
 
     private static SessionFactory sessionFactory;
+
+    private Util() {
+    }
+
     public static SessionFactory buildSessionJavaConfigFactory() {
         try {
             Properties properties = new Properties();
@@ -30,7 +34,7 @@ public class Util {
             properties.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
             properties.put(Environment.SHOW_SQL, "true");
             properties.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-            properties.put(Environment.HBM2DDL_AUTO, "create-drop");
+            properties.put(Environment.HBM2DDL_AUTO, "update");
 
             Configuration configuration = new Configuration();
             configuration.setProperties(properties);
@@ -38,8 +42,7 @@ public class Util {
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
-            SessionFactory sessionJavaConfigFactory = configuration.buildSessionFactory(serviceRegistry);
-            return sessionJavaConfigFactory;
+            return configuration.buildSessionFactory(serviceRegistry);
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);

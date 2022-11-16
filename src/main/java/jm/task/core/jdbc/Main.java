@@ -2,15 +2,14 @@ package jm.task.core.jdbc;
 
 import jm.task.core.jdbc.service.UserService;
 import jm.task.core.jdbc.service.UserServiceImpl;
-//import jm.task.core.jdbc.util.Util;
-
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class Main {
+    public final static Logger LOGGER = Logger.getLogger(UserServiceImpl.class.getName());
     public static final UserService userService = new UserServiceImpl();
 
     public static void main(String[] args) throws SQLException {
-//        Util util = new Util();
 
         userService.createUsersTable();
 
@@ -19,11 +18,9 @@ public class Main {
         userService.saveUser("Solomon", "Atokhojaev", (byte) 5);
         userService.saveUser("Maryann", "Atokhojaeva", (byte) 3);
 
-        userService.getAllUsers().forEach(user -> System.out.println(user.toString()));
+        userService.getAllUsers().forEach(user -> LOGGER.info(user.toString()));
 
-//        userService.removeUserById(id);
-
-        userService.cleanUsersTable();
-        userService.dropUsersTable();
+//        userService.cleanUsersTable();
+//        userService.dropUsersTable();
     }
 }
