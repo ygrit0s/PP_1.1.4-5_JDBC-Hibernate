@@ -20,7 +20,7 @@ public class Main {
 
         userService.getAllUsers().forEach(user -> LOGGER.info(user.toString()));
 
-//        userService.cleanUsersTable();
-//        userService.dropUsersTable();
+        userService.cleanUsersTable();
+        userService.dropUsersTable();
     }
 }
