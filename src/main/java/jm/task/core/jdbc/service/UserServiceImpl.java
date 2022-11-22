@@ -7,10 +7,11 @@ import jm.task.core.jdbc.model.User;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserServiceImpl implements UserService {
-    public final static Logger LOGGER = Logger.getLogger(UserServiceImpl.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(UserServiceImpl.class.getName());
     UserDao userDao = new UserDaoHibernateImpl();
     public void createUsersTable() throws SQLException {
         userDao.createUsersTable();
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     public void saveUser(String name, String lastName, byte age) throws SQLException {
         userDao.saveUser(name, lastName, age);
-        LOGGER.info("User с именем " + name + " добавлен в базу данных%n");
+        LOGGER.log(Level.INFO, "User с именем {0} добавлен в базу данных%n", new Object[]{name});
     }
 
     public void removeUserById(long id) throws SQLException {
